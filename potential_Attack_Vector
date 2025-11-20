@@ -1,1 +1,16 @@
 1. stVaults uses funds for many things, defenetly calling external contracts, I shall look for the most used one and how the stVault can be rejected, DOSed, ex removed from WL, ...
+2. user can stack and still get stEth as liquidity, is thera way where he can takes the liquidity and then withdraw funs ?
+3. Focus on cross vault contamination
+4. steth is minted by lido and stvaults, can the vault manager min st eth fro himself? maybe front run operations to benifit from them in some ways
+5. what happens to stvault with losses, steth is backed by eth, this influences teh steth value
+6. user can deposit eth into core poll get 1:1 steth, then redeem steth into a profitable stvault a get more eth
+7. Does vault factory really checks everyhting before deplying stVault ?
+
+
+
+
+
+
+Ongoing investigation
+staker can front run forced rebalancing by maximizing stage amount
+

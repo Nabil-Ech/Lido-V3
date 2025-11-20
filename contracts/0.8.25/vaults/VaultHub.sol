@@ -956,7 +956,7 @@ contract VaultHub is PausableUntilWithRoles {
         VaultConnection storage connection = _checkConnection(_vault);
         VaultRecord storage record = _vaultRecord(_vault);
         _requireFreshReport(_vault, record);
-
+        // available balance s influenced by staker, he can FR by increassing staged balance
         uint256 availableBalance = Math256.min(_availableBalance(_vault), _totalValue(record));
         if (availableBalance == 0) revert NoFundsForForceRebalance(_vault);
 
@@ -1235,7 +1235,7 @@ contract VaultHub is PausableUntilWithRoles {
         if (liability > totalValue_) {
             return type(uint256).max;
         }
-
+        // 100 eth or 100 wei ?
         // if not healthy and low in debt, please rebalance the whole amount
         if (liabilityShares_ <= 100) return liabilityShares_;
 
@@ -1298,8 +1298,10 @@ contract VaultHub is PausableUntilWithRoles {
         uint256 latestReportTimestamp = _lazyOracle().latestReportTimestamp();
         return
             // check if AccountingOracle brought fresh report
+            // if Accounting report updates, this will revert 
             uint48(latestReportTimestamp) <= _record.report.timestamp &&
             // if Accounting Oracle stop bringing the report, last report is fresh during this time
+            // is there a way to make it enormusly large?
             block.timestamp - latestReportTimestamp < REPORT_FRESHNESS_DELTA;
     }
 
